@@ -1,21 +1,41 @@
 <?php
-
- $id= $_POST['id'];
- $title=$_POST['title'];
- $price=$_POST['price'];
- $image=$_POST['image'];
- $seller=$_POST['seller'];
- $id++;
- $conn = mysqli_connect("localhost", "root", "sexler", "Negotiatus");
-if (mysqli_connect_errno())
-  {
-  echo "Failed to connect to MySQL: " . mysqli_connect_error();
-  }
   
-  
- mysqli_query($conn,"UPDATE products SET Image='".$image."', productName= '".$title."', Price= '".$price."', Seller= '".$seller."' WHERE id= '".$id."'");
- echo "cool";
-
+ $conn = mysql_connect("negotiatusBASE.db.8689925.hostedresource.com", "negotiatusBASE", "Yeknod!6789");
+ mysql_select_db("negotiatusBASE");
+ $count=0;
+ $search= $_POST['search'];
+ $item1= $_POST ['id'];
+ print_r("string");
+ $result=  mysql_query("SELECT * FROM Searches WHERE search='".$search."'");
+ $title1;
+ $price1;
+ $image1;
+ $seller1;
  
  
+ while($row= mysql_fetch_array($result))
+    {
+    $stuff= $row['resultsLink'];
+    }
+    
+    $stuff = file_get_contents($stuff);
+    $json = json_decode($stuff);
+    
+    foreach ($json->items as $item) 
+    {
+       if ($count == $item1)
+         {
+            $title= $item->product->title;
+            $image= $item->product->images[0]->link;
+            $price= $item->product->inventories[0]->price;
+            $seller= $item->product->author->name;
+            $link= $item->product->link;
+            $data= $title+";;" + $image+';;'+$price+';;'+$seller+';;'+$link;
+          }
+        
+        $count++;
+     }
+     
+
+     
 ?>

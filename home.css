@@ -6,7 +6,10 @@ div{
   display:block;
   }
 
-  
+input{
+border-radius: 5;
+}
+
 hr.main{
   width:100%; 
   float:left; 
@@ -20,51 +23,106 @@ hr.main{
   }
 
 hr.info{
-    width:98%;
-    height: 10px;
-    background: black;
+    width:57%;
+    float: left;
+    margin-left: 3%;
+    background: white;
     border-radius:5;
+    position:absolute;
 }
   
 body{ 
 	/*background-color:#323232;*/
-	background-image: url(background.jpg);
+	background-image: url(NegotiatusBackground.jpg);
 	margin:0;
 }
 
-div.header{
-    height:25%;
-    width:100%;
-    margin-top:4%;
-    /*background-color:#1B1B1B;*/
-    background-image: url(Band6.jpg);
-    position:relative;
-    }
 
-div.logo{
-      float:left;
-      margin-left: 5%;
-      }
+div.header{
+    /*height:18%;*/
+    width:100%;
+    min-width: 900px;
+    margin-top:150px;
+    position:relative;
+    height:150px;
+    /*width:1700px;*/
     
-img.logo{
-	height: 100%;
-	width: 25%;
+    }
+    
+h1{
+position:absolute;
+margin-top: 175px;
 }
 
-div.menu{
+img.logo{
+	
+    height: 110%;
+	width: 40%;
+    min-height: 200px;
+    min-width: 600px;
+	border: none;
+	position: absolute;
+	margin-top: -50px;
+	margin-left: 50px;
+}
+
+#menu, #menu2{
 	color:white;
-    margin-right:3%;
+    margin-right:40px;
     font-size: 150%;
-    font-family: bookman old style;
-   
+    font-family: century gothic;
     position: absolute;
     bottom:0px;
     right: 0px;
+    display:block;
     }
+    
+#menu3{
+	color:white;
+    margin-left:10%;
+    font-size: 150%;
+    font-family: century gothic;
+    position: absolute;
+    display:block;
+    }
+    
 
-div.test{
+
+#loginBox{
+	height: 70%;
+	width: 40%;
+	float:right;
+	margin-left:57%;
+	margin-top:-1.5%;
+	position:absolute;
+	border:10px solid #f29144;
+	border-radius:50px;
+	background: rgba(0,0,0,.5);
+	color: #FFF;
+	position:absolute;
+	display:none;
+	z-index:999;
+}
+
+#loginText{
+	margin-top: 5%;
+	text-align:center;
+	font-size: 150%;
+    font-family: century gothic;
+	display:none;
+}
+
+#registerText{
+	text-align:center;
+	font-size: 150%;
+    font-family: century gothic;
+	display:none;
+}
+
+div.infoPanel{
     margin-left:15%;
 }
+
 div.sellers{
 	float:left;
 	margin-left:8%;
@@ -162,81 +220,203 @@ div.negotiate{
 	border:1px solid #aaa;
 }
 
+#negotiate2{
+	height: 60%;
+	min-height: 500px;
+	width: 80%;
+	min-width: 1300px;
+	margin: 10%;
+	border:10px solid #f29144;
+	border-radius:50px;
+	position:absolute;
+	background: rgba(0,0,0,.7);
+	color: #FFF;
+	visibility: hidden;
+	z-index:990;
+}
+
+#negotiate3, #sellView{
+	height: 60%;
+	min-height: 500px;
+	width: 80%;
+	min-width: 1300px;
+	margin: 10%;
+	border:10px solid #f29144;
+	border-radius:50px;
+	position:absolute;
+	background: rgba(0,0,0,.7);
+	color: #FFF;
+	z-index:990;
+}
+
 div.photos{
-    text-align: center;
-    color: white;
 	float: left;
 	margin: 5% 4% 3%;
 	height: 60%;
 	width: 25%;
+	background-image: url(''); 
+	background-repeat: no-repeat; 
+	background-size:contain
 }
 
 div.itemInfo{
     color: black;
 	border:3px solid #fff;
-	background-color: #aaa;
+	background-image: url(backgroundplain.gif);
 	float: left;
 	margin: 2% 0% 0%;
 	width: 63%;
-	height: 80%;
+	height: 70%;
 }
 
 div.chat{
 margin-left:5%;
 font-size:120%;
 }
+
 p.prodTitle{
     font-weight: bold;
+    color: white;
     font-size: 200%;
     text-align:center;
+    font-family: futura; 
     }
 
 p.price{
-    text-align: left;
     float:left;
-    margin-left: 10%;
-    margin-top: 4%;
+    margin-left: 15%;
+    margin-top: -0.25%;
     font-weight: bold;
-    font-size: 150%;    
+    color: #f29144;
+    font-size: 150%;
+    font-family: futura;    
 }
 
 	
 input.buyer{
-	margin-top: 4%;
-	width: 50%;
-	border-radius: 5;
+	margin-left: 2%;
+	width: 55%;
+	border-radius: 10;
 	font-size: 20px;
 	}
 	
 input.buyer2
 {
-   border-radius: 5;
+   width: 15%;
+   border:3px solid #000;
    }
    
+ /*  
+input.email{
+margin-left:8%;
+margin-top: 3%;
+
+margin-left: 65px;
+margin-top:20px;
+border:3px solid #000;
+}
+*/
+
+#itemNum{
+visibility:hidden;
+}
+
+#itemSearch{
+visibility:hidden;
+}
+
+
+div.negButton{
+float:left;
+margin-top: 2%;
+margin-left: 25%;
+}
+
+div.cancelBtn{
+float:left;
+margin-left: 10%;
+margin-top: -2.5%;
+}
+
+div.sellBubble{
+width:70%;
+height: 30px;
+border:3px solid rgba(0,0,0,0);
+border-radius: 10;
+background-color: white;
+text-align:center;
+position:relative;
+margin-right: 5%;
+float:right;
+}
+
+div.bubble{
+width:70%;
+height: 30px;
+border:3px solid rgba(0,0,0,0);
+border-radius: 10;
+background-color: #f29144;
+text-align:center;
+position:relative;
+margin-left: 5%;
+}
+
+
 p.sellerPage{
    font-size:150%;
    float:left;
 }
 
 
+#splash{
+width:70%;
+height:600px;
+min-width:800px;
+margin-left: 15%;
+}
+
+
+#yours, #prodd, #list, #use, #sell, #site, #mail, #room{
+
+  	color: white;
+	margin-top: 5%;
+	float:left;
+	margin-left: 1%;
+    font-family: futura;
+}
+
+
+
 /*formatting of the search results */
 h5{
-  margin-right:13%;
+  margin-left:10%;
   color:white;
-  float:right;
+  float:left;
   }
   
 input.search1{
-	 border:none;
-	 box-shadow: 5px 5px 20px #aaa;
+	 border: 5px solid #555;
      width:75%;
+     min-width:900px;
      height:4%;
+     min-height: 35px;
      font-size:large;
      margin-left:10%;
      }
+     
+#prev{
+visibility: hidden;
+margin-left: 25%;
+}
+
+#next{
+visibility: hidden;
+margin-left: 35%;
+}
 
 #products{
-	width: 880px;
+	width: 60%;
+	min-width:800px;
 	margin-left: 25%;
 	text-align: left;
 	overflow: hidden;
@@ -313,7 +493,15 @@ input.search1{
 	color:#565a62;
 }
 
-    
+p.ques{
+ color: #f29144;
+
+}  
+
+b.about{
+font-size: 120%;
+color:white;
+}
  /*   Old searching methods
  
  h3.search{

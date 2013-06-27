@@ -4,8 +4,8 @@ require 'sessions.php';
 
  $conn = mysql_connect("negotiatusBASE.db.8689925.hostedresource.com", "negotiatusBASE", "Yeknod!6789");
  mysql_select_db("negotiatusBASE");
- $id= $_GET['id'];
- $result=  mysql_query("SELECT * FROM negotiations WHERE id='".$id."' AND user='" . $_SESSION['user']. "'");
+ $rand= $_GET['id'];
+ $result=  mysql_query("SELECT * FROM negotiations WHERE  random='" . $rand. "'");
  $title;
  $price;
  $image;
@@ -18,18 +18,19 @@ require 'sessions.php';
       $title= $data['product'];
       $image= $data['image'];
       $price= $data['listPrice'];
+      $offer= $data['yourPrice'];
       $seller= $data['seller'];
-      $link= $data['sellerLink'];
+      $name= $data['user'];
      }
      
 require 'sendgrid-php/SendGrid_loader.php';
 $sendgrid = new SendGrid('pennApps', 'hackathon2013');
 
 
-if (isset($_POST) && isset($_POST['buyer2'])) 
+if (isset($_POST) && isset($_POST['counter'])) 
   {	
-  	$askPrice = $_POST['buyer2'];
-  	$usermail= $_SESSION['email'];
+  	$askPrice = $_POST['counter'];
+  	$usermail= $_POST['email'];
   	$specifics=$_POST['buyer'];
  	$mail = new SendGrid\Mail();
    	$mail->addTo('info@negotiatus.com')->
@@ -89,14 +90,11 @@ alert("Negotiation received!");
      ?>
 </div>  
 
-<div id="negotiate3">
+<div id="sellView">
      <div class="photos" style= "background-image: url(<?= $image ?>); background-repeat: no-repeat; background-size:contain">  </div>
            <div class="itemInfo"> 
    				<p class="prodTitle"><?= $title ?></p>
-  		    	<p class="price">List: $<?= $price ?> </p> 
-          		<form action="" method="post">
-          		 	<input class="buyer" name= "buyer" id="buyer" placeholder="size/quanity/color/etc..."></input> 
-           		 	
+          		<form action="" method="post">           		 	
            		 	
            		 	<hr class="info"></hr>
            		 
@@ -104,14 +102,18 @@ alert("Negotiation received!");
            			<br>
            			<br>
            				<div class ="bubble" id="bubble">
-                  		  <b><?= $_SESSION['user'] ?> </b> would like to buy this product and would like to pay: $<input type="text" name="buyer2" class= "buyer2" id="buyer2" maxlength="20"/> per item. 
+                  		  <b><?= $name ?> </b> would like to buy this product and would like to pay $<?= $offer ?> per item. 
 						</div>
+						<br/>
+						<div class ="sellBubble" id="sellBubble">
+                  		  <b>The seller would be willing to charge: $<input type="text" name="counter" class= "counter" id="counter" maxlength="20"/> per item. 
+						</div>
+						
 						<div class= "negButton"><input type="submit" class="negotiate" id="negotiate" value="NEGOTIATE" /> </div>
 						
 					</form>
 				     
     	     </div>
-    	   <p class="sellerPage">For more item information, <a href= "<?= $link ?>" target= "_blank" >click here</a> for the seller's site </p>
      </div>
 </div>
 
