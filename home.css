@@ -1,9 +1,14 @@
+
 a{
   color: white;  
   }
   
 div{
   display:block;
+  }
+  
+  #container{
+  
   }
 
 input{
@@ -33,7 +38,7 @@ hr.info{
   
 body{ 
 	/*background-color:#323232;*/
-	background-image: url(NegotiatusBackground.jpg);
+	background-image: url(NegotiatusBackground2.jpg);
 	margin:0;
 }
 
@@ -42,59 +47,55 @@ div.header{
     /*height:18%;*/
     width:100%;
     min-width: 900px;
-    margin-top:150px;
+    margin-top:80px;
     position:relative;
-    height:150px;
+    height:100px;
     /*width:1700px;*/
     
     }
     
 h1{
 position:absolute;
-margin-top: 175px;
+margin-top: 125px;
 }
 
 img.logo{
 	
-    height: 110%;
-	width: 40%;
-    min-height: 200px;
-    min-width: 600px;
+    height: 55%;
+	width: 20%;
+    min-height: 100px;
+    min-width: 300px;
 	border: none;
 	position: absolute;
 	margin-top: -50px;
-	margin-left: 50px;
+	margin-left: 15%;
 }
 
-#menu, #menu2{
+.menu{
 	color:white;
-    margin-right:40px;
+    margin-right:270px;
     font-size: 150%;
     font-family: century gothic;
     position: absolute;
-    bottom:0px;
+    bottom:47px;
     right: 0px;
     display:block;
     }
     
 #menu3{
-	color:white;
     margin-left:10%;
-    font-size: 150%;
-    font-family: century gothic;
-    position: absolute;
-    display:block;
+    margin-right: 0px;
     }
     
 
 
-#loginBox{
-	height: 70%;
+.loginBox{
+	height:40%;
 	width: 40%;
 	float:right;
-	margin-left:57%;
-	margin-top:-1.5%;
-	position:absolute;
+	margin-right:265px;
+	right:0;
+	margin-top: -40px;
 	border:10px solid #f29144;
 	border-radius:50px;
 	background: rgba(0,0,0,.5);
@@ -104,20 +105,68 @@ img.logo{
 	z-index:999;
 }
 
-#loginText{
-	margin-top: 5%;
+.loginText{
 	text-align:center;
 	font-size: 150%;
     font-family: century gothic;
 	display:none;
 }
 
-#registerText{
+.registerText{
 	text-align:center;
 	font-size: 150%;
     font-family: century gothic;
 	display:none;
 }
+
+
+#failedBox{
+	display:inline;
+	position:absolute;
+	height: 30%;
+	width: 35%;
+	
+	top: 0;
+	bottom: 0;
+	right:0;
+	left:0;
+	margin: auto;
+}
+
+#explain{
+position:absolute;
+width: 100%;
+top:10;
+font-family: century gothic;
+}
+
+div.name{
+margin-left:2.5%;
+}
+
+div.regLink{
+margin-right:2.5%;
+font-family: century gothic;
+float: right;
+}
+
+
+hr.log{
+    width:95%;
+    left:0;
+    right:0;
+    margin:auto;
+    background: white;
+    border-radius:5;
+    position:absolute;
+}
+
+
+#failedText{
+display:block;
+margin-top: 15%;
+}
+
 
 div.infoPanel{
     margin-left:15%;
@@ -214,13 +263,9 @@ div.ads{
     width:120%;
     }
 
-div.negotiate{
-	height: 70%;
-	margin: 5%;
-	border:1px solid #aaa;
-}
 
-#negotiate2{
+
+div.negotiate{
 	height: 60%;
 	min-height: 500px;
 	width: 80%;
@@ -236,17 +281,7 @@ div.negotiate{
 }
 
 #negotiate3, #sellView{
-	height: 60%;
-	min-height: 500px;
-	width: 80%;
-	min-width: 1300px;
-	margin: 10%;
-	border:10px solid #f29144;
-	border-radius:50px;
-	position:absolute;
-	background: rgba(0,0,0,.7);
-	color: #FFF;
-	z-index:990;
+	visibility: visible;
 }
 
 div.photos{
@@ -254,9 +289,11 @@ div.photos{
 	margin: 5% 4% 3%;
 	height: 60%;
 	width: 25%;
-	background-image: url(''); 
-	background-repeat: no-repeat; 
-	background-size:contain
+}
+
+#itemPic{
+max-width:100%;
+max-height:100%;
 }
 
 div.itemInfo{
@@ -330,28 +367,19 @@ div.negButton{
 float:left;
 margin-top: 2%;
 margin-left: 25%;
+width:150px;
+height:75px;
 }
 
-div.cancelBtn{
+#cancel{
 float:left;
-margin-left: 10%;
-margin-top: -2.5%;
-}
+z-index: 999;
+margin-top: 1%;
 
-div.sellBubble{
-width:70%;
-height: 30px;
-border:3px solid rgba(0,0,0,0);
-border-radius: 10;
-background-color: white;
-text-align:center;
-position:relative;
-margin-right: 5%;
-float:right;
 }
 
 div.bubble{
-width:70%;
+width:40%;
 height: 30px;
 border:3px solid rgba(0,0,0,0);
 border-radius: 10;
@@ -359,6 +387,12 @@ background-color: #f29144;
 text-align:center;
 position:relative;
 margin-left: 5%;
+}
+
+#sellBubble{
+background-color: white;
+margin-right: 5%;
+float:right;
 }
 
 
@@ -389,19 +423,19 @@ margin-left: 15%;
 
 /*formatting of the search results */
 h5{
-  margin-left:10%;
+  margin-left:16%;
   color:white;
   float:left;
   }
   
 input.search1{
 	 border: 5px solid #555;
-     width:75%;
-     min-width:900px;
+	 width: 68%;
+	 min-width:800px;
      height:4%;
      min-height: 35px;
      font-size:large;
-     margin-left:10%;
+     margin-left:16%;
      }
      
 #prev{

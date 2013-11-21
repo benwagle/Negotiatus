@@ -73,25 +73,28 @@ alert("Negotiation received!");
     <script src="HubSpot-messenger-1618c83/build/js/messenger.min.js"></script>
     <script src="HubSpot-messenger-1618c83/build/js/messenger-theme-future.js"></script>
      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" />
-    <link rel="stylesheet" href="home.css">
      <link rel="stylesheet" href="HubSpot-messenger-1618c83/build/css/messenger.css">
       <link rel="stylesheet" href="HubSpot-messenger-1618c83/build/css/messenger-theme-future.css">
+      
+      <!-- <link rel="stylesheet" href="home.css"> -->
+      <link rel="stylesheet" href="containerTest.css">
 <title> Negotiation Room </title>
 
 </head>
 <body>
+
 <div class="header">
-    <div class="logo"><a href="index.php"><img class= "logo" src="logo.png"></a></div>
-     <?php 
-     if(isLoggedIn()) 
-          echo '<div id="menu2"> <a href="index.php">search</a> |&nbsp <a href="dashboard.php">dashboard</a> |&nbsp<a href="?outszo">logout</a></div>';
-    else
-          echo '<div id="menu"> <a id="login" href="#">login</a>/<a id="register" href="#">register</a></div>';
-     ?>
+    <div class= "menu" id="bottom"> <a href="index.php#aboutUs">about us</a> |&nbsp<a href="index.php#FAQ">faq</a> </div>
+    <a href="index.php"><img class= "logo" src="Logo_small.png"></a>
 </div>  
 
-<div id="sellView">
-     <div class="photos" style= "background-image: url(<?= $image ?>); background-repeat: no-repeat; background-size:contain">  </div>
+
+<div class="container">
+
+
+
+<div class= "negotiate" id="sellView">
+     <div class="photos"><img src= "<?= $image ?>" id="itemPic"></div>
            <div class="itemInfo"> 
    				<p class="prodTitle"><?= $title ?></p>
           		<form action="" method="post">           		 	
@@ -101,23 +104,21 @@ alert("Negotiation received!");
            			
            			<br>
            			<br>
-           				<div class ="bubble" id="bubble">
-                  		  <b><?= $name ?> </b> would like to buy this product and would like to pay $<?= $offer ?> per item. 
+           				<div class ="bubble" >
+                  		 <p class="offer"> <b><?= $_SESSION['user'] ?> </b> is offering:  $<input type="text" name="buyer2" class= "buyer2" id="buyer2" maxlength="20"/> per item. </p>
 						</div>
 						<br/>
-						<div class ="sellBubble" id="sellBubble">
-                  		  <b>The seller would be willing to charge: $<input type="text" name="counter" class= "counter" id="counter" maxlength="20"/> per item. 
+						<div class ="bubble" id="sellBubble">
+                  		 <p class="offer"> The seller is offering : $<input type="text" name="counter" class= "counter" id="counter" maxlength="20"/><p> 
 						</div>
-						
-						<div class= "negButton"><input type="submit" class="negotiate" id="negotiate" value="NEGOTIATE" /> </div>
+						<!-- <img src="textbox3.png">  -->
+						<div class="negButton"><img src="negBttn.png" width="150px" height="75px"></div>
 						
 					</form>
 				     
     	     </div>
-     </div>
+     
 </div>
-
-<a style="position:fixed; bottom:0;" href="about.php"> ABOUT US </a>
-
+</div>
 </body>
 </html>
