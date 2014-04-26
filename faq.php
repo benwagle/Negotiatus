@@ -91,7 +91,7 @@ if (isset($_POST) && isset($_POST['buyer2']) && isLoggedIn())
     <script src="HubSpot-messenger-90da009/build/js/messenger-theme-future.js" type="text/javascript"></script>
      <link rel="stylesheet" href="HubSpot-messenger-90da009/build/css/messenger.css">
      <link rel="stylesheet" href="HubSpot-messenger-90da009/build/css/messenger-theme-air.css">
-     
+     <link rel="shortcut icon" href="favicon.png" />
      <!-- <link rel="stylesheet" href="home.css"> -->
     <link rel="stylesheet" href="containerTest.css">
     
@@ -101,9 +101,9 @@ if (isset($_POST) && isset($_POST['buyer2']) && isLoggedIn())
 
 
 $(document).ready(function(){
-$(".test").css('display','none'); 
-$(".qSecs").css('display','none'); 
-$(".aboutMenus").css('display','none');
+// $(".test").css('display','none'); 
+// $(".qSecs").css('display','none'); 
+ $(".aboutMenus").css('display','none');
   
     $("#gen").click(function(){
     
@@ -232,19 +232,24 @@ $(".aboutMenus").css('display','none');
 
 	<p class="faqSec" id="gen" >General</p>
 	<font class= "qSecs" id="generalQs" color="black">
+	<br/>
 	<p class="Qs" id="Q1">What is Negotiatus?</p>
 	<p class="Qs" id="Q2">What is the problem Negotiatus is trying to solve?</p>
 	</font>
-	
+	<br/>
+	<br/>
 	 <p class="faqSec" id="buyerQ" >I'm a Buyer</p>
 	<font class= "qSecs" id="buyerQs" color="black">
+	<br/>
 	<p class="Qs" id="Q3">What are the benefits of using Negotiatus? </p>
 	<p class="Qs" id="Q4">How do I become a member? </p>
 	<p class="Qs" id="Q5">How do I negotiate?</p>
 	</font>
-	
+	<br/>
+	<br/>
 	<p class="faqSec" id="sellerQ" >I'm a Seller</p>
 	<font class= "qSecs" id="sellerQs" color="black">
+	<br/>
 	<p class="Qs" id="Q6">What are the benefits of using Negotiatus? </p>
 	<p class="Qs" id="Q7">How do I become a member?</p>
 	<p class="Qs" id="Q8">How do I negotiate?</p>

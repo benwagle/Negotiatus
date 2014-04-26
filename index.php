@@ -84,7 +84,7 @@ if (isset($_POST) && isset($_POST['buyer2']) && isLoggedIn())
     <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
     <script src="home.js" type="text/javascript"></script>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" />
-    
+    <link rel="shortcut icon" href="favicon.png" />
     
    <!--  MESSENGER ALERTS  -->
     <script src="HubSpot-messenger-90da009/build/js/messenger.min.js" type="text/javascript"></script>
@@ -177,6 +177,7 @@ $(".aboutMenus").css('display','none');
 
 </script>
 </head>
+
 <body>
 
 <div class="header">
@@ -249,7 +250,8 @@ $(".aboutMenus").css('display','none');
    				<p class="prodTitle"></p>
    				<br/>
   		    	<p class="price"> </p> 
-          		<form action="index.php" method="post" id="negForm">
+
+				 <form action="index.php" method="post" id="negForm">
           		 	<input class="buyer" name= "buyer" id="buyer" placeholder="size/quanity/color/etc..."></input>           		 	           		 	
            		 	<hr class="info"></hr>
            			<br>
@@ -257,12 +259,14 @@ $(".aboutMenus").css('display','none');
            				<div class ="bubble" id="bubble">
                   		 <p class="offer"> <b><?= $_SESSION['user'] ?> </b> is offering:  $<input type="text" name="buyer2" class= "buyer2" id="buyer2" maxlength="20"/> per item. </p>
 						</div>
-						<!-- 	<img src="textbox3.png">  -->
+						<!~~ 	<img src="textbox3.png">  ~~>
 						<div class="negButton"><img src="negBttn.png" width="150px" height="75px"></div>
 						<input id= "itemNum" value="" name= "itemNum"/>
 						<input id= "itemSearch" value="" name= "itemSearch"/>
 					</form>
-					
+
+					<br/>
+					<br/>
      			 <?php
 						if(!isLoggedIn())
 						{
@@ -275,7 +279,7 @@ $(".aboutMenus").css('display','none');
 				    	?>
     	     </div>
     	     <div id="cancel"><img src="circleX.png" width="30px" height="30px"></div>
-    	   <p class="sellerPage">For more item information, <a href= "" target= "_blank" >click here</a> for the seller's site </p>
+    	   <p class="sellerPage" id="sellerPage">For more item information, <a href= "" target= "_blank" >click here</a> for the seller's site </p>
 </div>
 
 

@@ -73,7 +73,7 @@ function message()
      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" />
      <link rel="stylesheet" href="HubSpot-messenger-1618c83/build/css/messenger.css">
       <link rel="stylesheet" href="HubSpot-messenger-1618c83/build/css/messenger-theme-future.css">
-        
+        <link rel="shortcut icon" href="favicon.png" />
        <!--  <link rel="stylesheet" href="home.css"> -->
     <link rel="stylesheet" href="containerTest.css">
     

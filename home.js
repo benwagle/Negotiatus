@@ -57,7 +57,6 @@ function ajaxProductsSearch(){
    'search' : searchBox.val()
     },
     
-    
 //************************************************************************************************************
 //************************************************************************************************************    
 function(data) 
@@ -71,7 +70,25 @@ function(data)
          return false;
         }
 
-     results1= data; 
+        results1= data; 
+        //alert(data['Items']['Item'][0]['ItemAttributes']['Title']);
+        //alert(data['Items']['Item'][0]['MediumImage']['URL']);
+        
+        var n;
+        for(n=0; n<9; n++)
+        {
+        message.css('visibility','hidden');
+        var html = ' <a class="product" id = "'+n+'" data-price= "'+data['Items']['Item'][n]['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice']+ '" href="#" >';
+        // If the product has images
+	    html += '<img title= "'+data['Items']['Item'][n]['ItemAttributes']['Title']+'" alt="'+data['Items']['Item'][n]['ItemAttributes']['Title']+'" src="'+ data['Items']['Item'][n]['MediumImage']['URL']+'"/>';
+        html+='<span>'+data['Items']['Item'][n]['ItemAttributes']['Title']+'</span></a> ';
+        products.append(html);
+    	}
+       /* var price1 = results.items[index].product.inventories[0]['price'];
+        var image1 = results.items[index].product.images[0]['link'];
+        var seller1= results.items[index].product.author['name'];
+     
+     /*
      $.each(data.results, function(i, item)
     {
        //alert(item.sitedetails[0].latestoffers[0]['seller']);
@@ -94,12 +111,13 @@ function(data)
         $.post( "products.php", 
            { id : index, title : results.items[index].product.title, price: price1, image: image1, seller : seller1}
          );
-           */
+           
      });
+     */
 	$("#cont").css('display','none');
     preloader.css('visibility','hidden');
-    $('#next').css('display','inline');
-    $('#prev').css('display','inline');
+    //$('#next').css('display','inline');
+    //$('#prev').css('display','inline');
      $('#container').css('height','900px');
 
   },'json');
@@ -118,14 +136,14 @@ $('p').click(function()
  */
   $(document).on('click', '.product', function(e) {
   var number = this.id;
-  var price= results1.results[number]['price'];
+  var price= results1['Items']['Item'][number]['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice'];
  // var seller = results.items[number].product.link;
   var Title= $(this).children('img').attr('title');
   var imageURL= $(this).children('img').attr('src');
   $("#itemPic").attr('src', imageURL);
   $(".price").html("List: $"+ price);
   $(".prodTitle").html(Title.toUpperCase());
- // $(".sellerPage").children('a').attr('href', seller);
+  $(".sellerPage").children('a').attr('href', searchBox.val() );
   $("#negotiate2").css('visibility','visible'); 
   $("#itemNum").attr('value',number); 
   $("#itemSearch").attr('value',searchBox.val()); 
@@ -207,6 +225,8 @@ if((low+21) < 100 )
    ajaxProductsSearch();
  }
  });
+ 
+ 
  
   $('#prev').click(function()
 {

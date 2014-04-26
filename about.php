@@ -85,7 +85,7 @@ if (isset($_POST) && isset($_POST['buyer2']) && isLoggedIn())
     <script src="home.js" type="text/javascript"></script>
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" />
     
-    
+    <link rel="shortcut icon" href="favicon.png" />
    <!--  MESSENGER ALERTS  -->
     <script src="HubSpot-messenger-90da009/build/js/messenger.min.js" type="text/javascript"></script>
     <script src="HubSpot-messenger-90da009/build/js/messenger-theme-future.js" type="text/javascript"></script>

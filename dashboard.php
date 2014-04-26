@@ -22,9 +22,9 @@ while($row=mysql_fetch_array($result))
     {
       $productName= substr($productName, 0, 90) . "...";
     }
-    $prodd= $prodd. "<div class=".$level."> <a href=negotiate2.php?id=" . $row['id']. ">".$productName." </a> $". $row['listPrice']." $". $row['yourPrice']."</div> <br/><br/>"; 
-    // $list= $list ."<p class=".$level."> $". $row['listPrice']." </p><br/>";
-    // $yours= $yours. "<p class=".$level.">$". $row['yourPrice']."</p><br/>";
+    $prodd= $prodd. "<a class=".$level." href=negotiate2.php?id=" . $row['id']. ">".$productName." </a> <br/><br/>"; 
+    $list= $list ."<p class=".$level."> $". $row['listPrice']." </p><br/>";
+    $yours= $yours. "<p class=".$level.">$". $row['yourPrice']."</p><br/>";
     $count= $count+1;
   }
 
@@ -43,7 +43,7 @@ $yours= $yours. "</div>";
     <script src="home.js" type="text/javascript"></script>
      <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans+Condensed:700" />
      
-     
+     <link rel="shortcut icon" href="favicon.png" />
     <!-- <link rel="stylesheet" href="home.css"> -->
     <link rel="stylesheet" href="containerTest.css">
 
@@ -71,32 +71,33 @@ $(".aboutMenus").css('display','none');
 <body> 
 
 <div class="header">
-<div class= "menu" id="bottom"> about us</div>
+ 	<div class= "menu" id="bottom"> about us</div>
  	 <a href="about.php"><p class="aboutMenus">history</p></a>
  	<a href="faq.php"><p class="aboutMenus">faqs</p></a>
  	<a href="contact.php"><p class="aboutMenus">contact us</p></a>
- 	    
- 	 <a href="index.php"><img class= "logo" src="Logo_small.png"></a>
-</div> 
+ 	
+    <a href="index.php"><img class= "logo" src="Logo_small.png"></a>
+    
+    <div class="loginBox">
     
          <form class="loginText" action="login.php" method="post">
-    		<input type="text" maxlength="30" name="user" placehodler="username"/>
+    		<input type="text" maxlength="30" name="user" placeholder="username"/>
     		<input type="password" name="pass" placeholder="password"/>
     		<input type="submit" value="Login"/>
          </form>
          
     </div>
     
-     <div class= "menu" id="menu1">
+    <div class= "menu" id="menu1">
     <?php 
      if(isLoggedIn()) 
           echo '<a href="index.php">search</a> |&nbsp <a href="dashboard.php">dashboard</a> |&nbsp<a href="?outszo">logout</a>';
     else
-          echo '<a id="login" href="#">login</a>| <a id="register" href="register.php">register</a> ';
+          echo '<div id="dispMen"> <a id="login" href="#">login</a>| <a id="register" href="register.php">register</a> </div> ';
      ?>
      </div>
-
 </div> 
+
 
 <div class="container" style="overflow:hidden;">
 <div id="splash">

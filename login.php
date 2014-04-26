@@ -53,7 +53,7 @@ else
     <script src="home.js" type="text/javascript"></script>
     
      
-     
+     <link rel="shortcut icon" href="favicon.png" />
    <!--  <link rel="stylesheet" href="home.css"> -->
     <link rel="stylesheet" href="containerTest.css">
 
@@ -90,28 +90,36 @@ $(".aboutMenus").css('display','none');
 
 <div class="container" id="sidePage"> 
 
-<div id="splash"> 
+<div id="splash">
+ <p class="infoTitles" > Login Failed </p>
+<div class="contLeft" id="contactSplitRight">
 
-	<div class="loginBox" id="failedBox">
-		<div id="explain">
-		<div class="name" > Negotiatus Login </div>
-		<hr class="log"/>
-		<div class="name">
-		The email and password combination entered is not correct. <br/> Please try again.  
-		</div>
-		</div>
-			 <form class="loginText" id="failedText" action="login.php" method="post">
-				username:<input type="text" maxlength="30" name="user"/>
-				password:<input type="password" name="pass"/>
-				<input type="submit" value="Login"/>
+		 <form class="loginText" id="failedText" action="login.php" method="post">
+				<p class="regInp">username:<input type="text" maxlength="30" name="user"/></p>
+				<p class="regInp">password:<input type="password" name="pass"/></p>
+				<div class="regInp" id="regButt"> <p class="infoTitles" id="registerButton"> Login! </p></div>
 			 </form>
-		 
-			<div id="regLink">
-			 <a  href="register.php">Sign up for Negotiatus</a>
-			</div>
-         
-	</div>
-</div>	
+			<a href="index.php"><p class="regInp" id="already"> Forgot your password?</p></a>
+			
+</div>
+
+<div class="contRight" id="contactSplitLeft">
+</br>
+</br>
+</br>
+ <p class="infoTitles" id="haveSomething"> 
+   The information you have 
+   <br/>entered is incorrect.
+   <br/>
+   Please try again. 
+    </p> 
+   
+
+</div>
+
+
+
+</div>
 </div>
 </body>
 </html>

@@ -10,7 +10,7 @@ require 'sessions.php';
 <html>
 <head>
 
-<title> Contact Negotiatus </title>
+<title> Seller Dashboard </title>
 <link rel="shortcut icon" href="favicon.png" />
 <script src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
 <script src="home.js" type="text/javascript"></script>
@@ -63,44 +63,14 @@ $(".aboutMenus").css('display','none');
 </div> 
 
 <div class="container" id="sidePage">
-
-<div id="splash">
- <p class="infoTitles" > Contact Us </p>
-<div class="contLeft" id="contactSplitRight">
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<br/>
-<p class="underStuff">General Question?  <a href="faq.php" class="emailLink"> Check this out </a></p>
-<br/>
-<p class="underStuff" id="sumSpec">Something Specific? <a class="emailLink"> info@negotiatus.com</a> </p> 
-<br/>
-
-<div id="social">
-<p id="letsSocial">Let's Get Social.</p> 
-<div id= "socialLogo" >
-<a href="https://www.facebook.com/Negotiatus"><img src="fb_logo.png"><a> <a href="https://twitter.com/negotiatus"><img  src="twit_logo.png"></a>
-</div>
+    <div id="splash">
+    <p class="infoTitles" > Dashboard </p>
+        <div id="l"></div>
+        <div id="ml"></div>
+        <div id="mr"></div>
+        <div id="r"></div>
+     </div>
 </div>
 
-</div>
-
-<div class="contRight" id="contactSplitLeft">
-</br>
-</br>
-</br>
- <p class="infoTitles" id="haveSomething"> 
-   Have something to say?
-    </p> 
-   <p class="underStuff">Let's discuss. We like to talk. And we like to listen. </p>
-
-</div>
-
-
-
-</div>
-</div>
 </body>
 </html>

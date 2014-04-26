@@ -73,7 +73,7 @@ div{
   }
   
   #sidePage{
-  top:100px;
+  margin-top:75px;
   height:600px; 
   min-height:600px;
   }
@@ -593,7 +593,7 @@ hr.split{
 
 p.about{
 font-size: 120%;
-color:black;
+color:rgb(110,110,110);
 font-family:American Typewriter;
 margin-left:10%;
 margin-right:10%;
@@ -609,13 +609,13 @@ line-height:120%
 font-family:American Typewriter;
 margin-left:10%;
 margin-right:10%;
-font-style:italic;
 display:inline-block;
 }
 
 #clickedQ {
-font-family:American Typewriter;
+font-family:futura;
 margin-top:2%;
+line-height:120%;
 }
 
 #showAns {
@@ -624,14 +624,15 @@ margin-left:50px;
 margin-right:50px;
 margin-top:2%;
 text-align:left;
+line-height:120%;
 }
 
 .faqSec{
  color:black; 
- font-size:120%; 
- font-weight:bold; 
+ font-size:150%; 
  margin-left:10%; 
  margin-top:1%;
+ font-family:American Typewriter;
  }
 
 
@@ -723,6 +724,20 @@ background: rgba(53,144,122,1);
 #prodd a{
 color:black;
 }
+
+
+/* Seller DashBoard */
+
+#l, #ml, #mr, #r{
+height:75%;
+width:22%;
+margin-left:2.2%;
+margin-top:2%;
+float:left;
+border:2px solid #98b6d4;
+background:orange;
+}
+
 
 
 /*formatting of the search results */

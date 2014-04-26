@@ -76,7 +76,7 @@ else if(strlen($email) ==0 )
     <script src="HubSpot-messenger-90da009/build/js/messenger-theme-future.js" type="text/javascript"></script>
      <link rel="stylesheet" href="HubSpot-messenger-90da009/build/css/messenger.css">
      <link rel="stylesheet" href="HubSpot-messenger-90da009/build/css/messenger-theme-air.css">
-     
+     <link rel="shortcut icon" href="favicon.png" />
    <!--  <link rel="stylesheet" href="home.css"> -->
     <link rel="stylesheet" href="containerTest.css">
 
