@@ -4,53 +4,19 @@ require 'sessions.php';
 
 require 'sendgrid-php/SendGrid_loader.php';
 $sendgrid = new SendGrid('pennApps', 'hackathon2013');
-
+  
 if (isset($_POST) && isset($_POST['buyer2']) && isLoggedIn()) 
   {	
    /**************************       get all of the item information        ********************/
     $conn = mysql_connect("negotiatusBASE.db.8689925.hostedresource.com", "negotiatusBASE", "Yeknod!6789");
  	mysql_select_db("negotiatusBASE");
- 	$count=0;
-	$search= mysql_real_escape_string($_POST['itemSearch']);
-	$item1= $_POST['itemNum'];
- 	$result=  mysql_query("SELECT * FROM Searches WHERE search='".$search."'");
- 	/*
- 	$title= $_POST['title1'];
- 	$price= $_POST['price1'];;
- 	$image= $_POST['image1'];;
- 	$seller= $_POST['seller1'];;
- 	$link= $_POST['link1'];;
- 	*/
- 	$title;
- 	$price;
- 	$image;
- 	$seller;
- 	$link;
+ 	$title= mysql_real_escape_string($_POST['title1']);
+ 	$price= mysql_real_escape_string($_POST['price1']);
+ 	$image= mysql_real_escape_string($_POST['image1']);
+ 	//$seller= mysql_real_escape_string($_POST['seller1']);
+ 	$link= mysql_real_escape_string($_POST['link1']);
  
- 
- 	while($row= mysql_fetch_array($result))
-   	 {
-    	$stuff= $row['resultsLink'];
-      }
-    
-    $stuff = file_get_contents($stuff);
-    $json = json_decode($stuff);
-    
-    foreach ($json->items as $item) 
-    {
-       if ($count == $item1)
-         {
-            $title= mysql_real_escape_string($item->product->title);
-            $image= mysql_real_escape_string($item->product->images[0]->link);
-            $price= $item->product->inventories[0]->price;
-            $seller= mysql_real_escape_string($item->product->author->name);
-            $link= mysql_real_escape_string($item->product->link);
-            break;
-          }
-        
-        $count++;
-     }
- 
+  
    /****************************   finished collecting all the item info    *************************************************/
    
    
@@ -60,7 +26,6 @@ if (isset($_POST) && isset($_POST['buyer2']) && isLoggedIn())
    $rand= substr(str_shuffle(MD5(microtime())), 0, 12);
    //Insert the negotiation information into the database
    $insert = mysql_query("INSERT INTO negotiations (user, product, listPrice, yourPrice, userTalk, image, seller, sellerLink, random) VALUES ('" .$_SESSION['user']. "', '" .$title. "', '" .$price. "', '" .$askPrice. "', '" .$specifics. "', '" .$image. "', '" .$seller. "', '" .$link. "', '" .$rand. "')"); 
-  
       
   //sending the email to neogtiatus
  	$mail = new SendGrid\Mail();
@@ -73,7 +38,22 @@ if (isset($_POST) && isset($_POST['buyer2']) && isLoggedIn())
   }
   
   
+  /************* Send info for manually getting item information **************/
+  if (isset($_POST)  && isset($_POST['q']) && isLoggedIn())
+   {
+      $name= $_SESSION['user'];
+      $item = $_POST['q'];
+      $usermail= $_SESSION['email'];
+      $mail = new SendGrid\Mail();
+   	  $mail->addTo('info@negotiatus.com')->
+          setFrom($usermail)->
+          setSubject('Negotiation requested!')->
+          setHtml("<p>The item link is '$item' and the username is '$name' </p>");
+	  $sendgrid->web->send($mail);
+    
+   }
   
+  /********* LOGOUT ***********/
   if(isset($_GET['outszo']))
      logout();
 ?>
@@ -214,8 +194,8 @@ $(".aboutMenus").css('display','none');
  
  
  
-        <form action="" id="searching" method="get">
-		<input class= "search1" type="text" id="q" name="q" placeholder="what do you want to buy?"> </input> <img id="preload" alt="preload" src=""/>
+        <form action="index.php" method="post" id="searching">
+		<input class= "search1" type="text" id="q" name="q" placeholder="paste your item link here"> </input> 
         </form>
 </header>  
   
@@ -259,10 +239,13 @@ $(".aboutMenus").css('display','none');
            				<div class ="bubble" id="bubble">
                   		 <p class="offer"> <b><?= $_SESSION['user'] ?> </b> is offering:  $<input type="text" name="buyer2" class= "buyer2" id="buyer2" maxlength="20"/> per item. </p>
 						</div>
-						<!~~ 	<img src="textbox3.png">  ~~>
+						<!--	<img src="textbox3.png">  -->
 						<div class="negButton"><img src="negBttn.png" width="150px" height="75px"></div>
-						<input id= "itemNum" value="" name= "itemNum"/>
-						<input id= "itemSearch" value="" name= "itemSearch"/>
+						
+						<input id= "title1" value="" name= "title1"/>
+						<input id= "price1" value="" name= "price1"/>
+						<input id= "image1" value="" name= "image1"/>
+						<input id= "link1" value="" name= "link1"/>
 					</form>
 
 					<br/>
@@ -286,9 +269,13 @@ $(".aboutMenus").css('display','none');
 <div id="splash"> 
 
 <div id="products">
-
-            <!-- The product list will go here -->
+  
+		<?php
+		if(isLoggedIn())
+			echo '<p class="infoTitles"> Welcome '. $_SESSION["user"] .'! </p></br>';
+        ?>
         
+        <!-- The product list will go here -->
 </div>
 
 <div id="prev"> <img src="prev_button_small.png" > </div> <div id="next"> <img src="next_button_small.png" > </div>
@@ -297,14 +284,18 @@ $(".aboutMenus").css('display','none');
             <!-- Error messages will be displayed here -->
 </p>
 
-<div id="cont">
-	 <p class="infoTitles"> How it Works </p> 
-	<div id="trip"> 
-	<img class="instructions" src="initiate.png"> <img class="instructions" src="negotiate.png"> <img class="instructions" src="luxuriate.png"> 
-	</div> 
+  <?php
+        if(!isLoggedIn())
+        {
+		 echo  '<div id="cont">
+				 <p class="infoTitles"> How it Works </p> 
+				<div id="trip"> 
+				<img class="instructions" src="initiate.png"> <img class="instructions" src="negotiate.png"> <img class="instructions" src="luxuriate.png"> 
+				</div> 
 	
-</div>
- 
+			   </div>';
+		}
+    ?>
 
  </div>
  
@@ -326,4 +317,31 @@ $(".aboutMenus").css('display','none');
 
 </div>
 </body>
+
+<script>
+ function dash(data)
+   {
+     var n= 0;
+     var html = ' <a class="product" id = "'+n+'" data-price= "'+data['listPrice']+ '" href="#" >';
+	 html += '<img title= "'+data['product']+'" alt="'+data['product']+'" src="'+ data['image']+'"/>';
+	 html+='<span>'+data['product']+'</span></a> ';
+	 $('#products').append(html);	 
+   }
+</script>
+
+<?php
+if(isLoggedIn())
+  {
+    $conn = mysql_connect("negotiatusBASE.db.8689925.hostedresource.com", "negotiatusBASE", "Yeknod!6789") or die(mysql_error());
+    mysql_select_db("negotiatusBASE");
+    $result= mysql_query("SELECT listPrice, product, image FROM negotiations WHERE user= '". $_SESSION['user']."'");
+    $count=0;
+    while($row=mysql_fetch_array($result))
+     {
+        $row= json_encode($row);
+         echo '<script> dash('.$row.'); </script>'; 
+      }  
+  }
+?>
+
 </html>

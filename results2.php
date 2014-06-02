@@ -1,12 +1,29 @@
 <?php
 
+session_start();
+require 'sessions.php';
+
 require_once 'Amazon-ECS-PHP-Library/lib/AmazonECS.class.php';
+require 'sendgrid-php/SendGrid_loader.php';
+$sendgrid = new SendGrid('pennApps', 'hackathon2013');
+
 //require('lib/Semantics3.php');
 
 $search1;
 $search1=$_POST['search'];
-//$items= explode( "/",$search1);
-//$aid= $items[3];
+$page=2;
+if(strpos( $search1, "http") !== False) 
+   {
+     if(strpos( $search1,"amazon.com") !== False)
+      {
+		$items= explode( "www.amazon.com",$search1);
+		$items= explode( "/",$items[1]);
+		$search1= $items[3];
+		$page=1;
+	  }
+	  
+	}
+	
 //$url;
 $key= "AKIAJQ2ELXIWFWOZXONQ";
 $sec= "omH451F8M20lJXR3NK+nGhnM1sEK8Fg07/55hTo3";
@@ -21,12 +38,11 @@ $client->category("All");
 $client->responseGroup('Large');
 $client->returnType(AmazonECS::RETURN_TYPE_ARRAY);
 
-$client->page(1);
+$client->page($page);
 
 $response_final = $client->search($search1);
 
 echo json_encode($response_final);
-
 
 /********* Semantics3 Code ******************* /
 //$key = 'AIzaSyD292Hx2skndazhuPsirjsPGctTdKcgy8I';

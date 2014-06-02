@@ -117,7 +117,8 @@ $(".aboutMenus").css('display','none');
 <div id="splash">
  <p class="infoTitles" > Register </p>
 <div class="contLeft" id="contactSplitRight">
-<form class="registerText" action="register.php" method="post">
+
+			<form class="registerText" action="register.php" method="post">
 				<br/>
 				<br/>
 				<br/>
@@ -129,7 +130,7 @@ $(".aboutMenus").css('display','none');
 				<br/>
 				<p class="regInp">retype password:<input type="password" name="pass2"/></p>
 				<br/>
-				<div class="regInp" id="regButt"> <p class="infoTitles" id="registerButton"> Register! </p></div>
+				<div class="regInp" id="regButt"> <input type="submit" value="Register" class="infoTitles" id="registerButton"> </input></div>
 			 </form>
 		 
 			<a href="index.php"><p class="regInp" id="already"> Already have an account?</p></a>

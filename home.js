@@ -4,8 +4,6 @@ var saveTimer;
 searchBox = $('#q');
 products =  $('#products');
 message = $('#message');
-preloader = $('#preload');
-preloader.css('visibility','hidden');
 var results;
 var title1;
 var search;
@@ -45,11 +43,10 @@ $('#searching').submit(function(e)
 //************************************************************************************************************
 //************************************************************************************************************
 function ajaxProductsSearch(){
-   products.empty();
-   preloader.css('visibility','visible')
+   //products.empty();
    $('#next').css('display','none');
     $('#prev').css('display','none');
-   preloader.attr("src","data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wCEAAkGBggGBQkIBwgKCQkKDRYODQwMDRoTFBAWHxwhIB8cHh4jJzEqIyUvJR4eKzssLzM1ODg4LCo9QTw2QTI0ODMBCQoKDgwNDg4LECkYHhgpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKSkpKf/AABEIABgAJgMBIgACEQEDEQH/xAAaAAEBAAIDAAAAAAAAAAAAAAAABgUHAgME/8QAKhAAAgEDAgUCBwEAAAAAAAAAAQIDAAQFBhESITFBURNCFCIjUmFxcgf/xAAUAQEAAAAAAAAAAAAAAAAAAAAA/8QAFBEBAAAAAAAAAAAAAAAAAAAAAP/aAAwDAQACEQMRAD8A3jUocxmNR308Wn2htbG3cxteSrxGRh1CDxVNdI8lpKkZ2dkIU+DtyqU0dnMdjdKWcF1KLaRJHgk4wdlk3J+Y9t/zQc7nIZ/S5Fzk5Yspjd9pZIo+CSIH3bDkRVVDKk8KSxMHjkUMrDuD0NYHN6jxMmHyUK3KXHp27BwnzLu3ILv03JPSu3RkqvpOxQSrI8UQSQA80Ye0jsRQZylKUCp3LaPivL6S9x93Jj7mUbS8Chkl/pTyNKUHhb/PReQMmTyk8+wPpLEixRxt93CORNTuQbUWlchF9L15uIKl3GpPxCdkcDqf3zHmlKDZ8LM8CNIvA7KCy+D4pSlB/9k=")
+ 
 
 // Issue a request to the proxy
   $.post('results2.php', 
@@ -64,26 +61,112 @@ function(data)
     //No results found so this happens
      if(data.totalItems == 0)
        {
-         preloader.css('visibility','hidden');
          message.css('visibility','visible');
          message.html("We couldn't find anything!").show();
          return false;
         }
-
         results1= data; 
-        //alert(data['Items']['Item'][0]['ItemAttributes']['Title']);
+        //alert(data['Items']['Item']['ItemAttributes']['Title']);
         //alert(data['Items']['Item'][0]['MediumImage']['URL']);
-        
         var n;
-        for(n=0; n<9; n++)
-        {
-        message.css('visibility','hidden');
-        var html = ' <a class="product" id = "'+n+'" data-price= "'+data['Items']['Item'][n]['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice']+ '" href="#" >';
-        // If the product has images
-	    html += '<img title= "'+data['Items']['Item'][n]['ItemAttributes']['Title']+'" alt="'+data['Items']['Item'][n]['ItemAttributes']['Title']+'" src="'+ data['Items']['Item'][n]['MediumImage']['URL']+'"/>';
-        html+='<span>'+data['Items']['Item'][n]['ItemAttributes']['Title']+'</span></a> ';
-        products.append(html);
+        
+        //bad way of doing this
+        if(searchBox.val().indexOf("http") != -1)
+          {
+				if(searchBox.val().indexOf("amazon.com") != -1)
+				 {
+				   /*
+					message.css('visibility','hidden');
+					var html = ' <a class="product" id = "single" data-price= "'+data['Items']['Item']['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice']+ '" href="#" >';
+					// If the product has images
+					html += '<img title= "'+data['Items']['Item']['ItemAttributes']['Title']+'" alt="'+data['Items']['Item']['ItemAttributes']['Title']+'" src="'+ data['Items']['Item']['MediumImage']['URL']+'"/>';
+					html+='<span>'+data['Items']['Item']['ItemAttributes']['Title']+'</span></a> ';
+					products.append(html);
+					$("#cont").css('display','none');
+					//$('#next').css('display','inline');
+					//$('#prev').css('display','inline');
+					 $('#container').css('height','900px');
+					 */
+					 var price= data['Items']['Item']['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice'];
+					 // var seller = results.items[number].product.link;
+					  //var Title= $(this).children('img').attr('title');
+					  var Title= data['Items']['Item']['ItemAttributes']['Title'];
+					  //var imageURL= $(this).children('img').attr('src');
+					  var imageURL= data['Items']['Item']['MediumImage']['URL'];
+					  $("#itemPic").attr('src', imageURL);
+					  $(".price").html("List: "+ price);
+					  $(".prodTitle").html(Title.toUpperCase());
+					  $(".sellerPage").children('a').attr('href', searchBox.val() ); 
+					  //$("#itemNum").attr('value',number); 
+					  //$("#itemSearch").attr('value',searchBox.val()); 
+					  $("#title1").attr('value',Title); 
+					  $("#image1").attr('value',imageURL);
+					  $("#link1").attr('value',searchBox.val()); 
+					  $("#price1").attr('value',price); 
+					  $("#negotiate2").css('visibility','visible');	 
+					 
+				 } 	 
+				 
+				 else
+				 {
+				   $.ajax({
+   			 		 url : 'index.php',
+    		 		type : 'post',
+     				data : $('#searching').serialize(),
+     
+     
+						success : function(data) 
+								{
+					
+							 Messenger.options = {
+							 extraClasses: 'messenger-fixed messenger-on-top',
+							 theme: 'air'
+								};
+			   
+							 Messenger().post({
+							message: 'Fetching product info, make sure you are logged in!',
+							 showCloseButton: true
+							 });
+							}
+      			 	});
+      			 	
+      			 	 var price= "pending";
+					 // var seller = results.items[number].product.link;
+					  //var Title= $(this).children('img').attr('title');
+					  var Title= "Fetching product info from: </br>" + searchBox.val();
+					  //var imageURL= $(this).children('img').attr('src');
+					  var imageURL= "N.jpg";
+					  $("#itemPic").attr('src', imageURL);
+					  $(".price").html("List: "+ price);
+					  $(".prodTitle").html(Title);
+					  $(".sellerPage").children('a').attr('href', searchBox.val() ); 
+					  //$("#itemNum").attr('value',number); 
+					  //$("#itemSearch").attr('value',searchBox.val()); 
+					  $("#title1").attr('value',Title); 
+					  $("#image1").attr('value',imageURL);
+					  $("#link1").attr('value',searchBox.val()); 
+					  $("#price1").attr('value',price); 
+					  $("#negotiate2").css('visibility','visible');	
+    	           }
+    	  }
+    	
+    	else
+    	{
+ 		 for(n=0; n<9; n++)
+        	{
+				message.css('visibility','hidden');
+				var html = ' <a class="product" id = "'+n+'" data-price= "'+data['Items']['Item'][n]['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice']+ '" href="#" >';
+				// If the product has images
+				html += '<img title= "'+data['Items']['Item'][n]['ItemAttributes']['Title']+'" alt="'+data['Items']['Item'][n]['ItemAttributes']['Title']+'" src="'+ data['Items']['Item'][n]['MediumImage']['URL']+'"/>';
+				html+='<span>'+data['Items']['Item'][n]['ItemAttributes']['Title']+'</span></a> ';
+				products.append(html);
+    	    }
+    	    $("#cont").css('display','none');
+			//$('#next').css('display','inline');
+			//$('#prev').css('display','inline');
+			 $('#container').css('height','900px');
     	}
+    	
        /* var price1 = results.items[index].product.inventories[0]['price'];
         var image1 = results.items[index].product.images[0]['link'];
         var seller1= results.items[index].product.author['name'];
@@ -114,11 +197,7 @@ function(data)
            
      });
      */
-	$("#cont").css('display','none');
-    preloader.css('visibility','hidden');
-    //$('#next').css('display','inline');
-    //$('#prev').css('display','inline');
-     $('#container').css('height','900px');
+	
 
   },'json');
   //************************************************************************************************************
@@ -135,26 +214,30 @@ $('p').click(function()
  
  */
   $(document).on('click', '.product', function(e) {
-  var number = this.id;
-  var price= results1['Items']['Item'][number]['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice'];
+  //var number = this.id;
+  // if(number!="single")
+//   	var price= results1['Items']['Item'][number]['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice'];
+//   else
+//     var price= results1['Items']['Item']['Offers']["Offer"]["OfferListing"]["Price"]['FormattedPrice'];
  // var seller = results.items[number].product.link;
+  var price= $(this).attr('data-price');
   var Title= $(this).children('img').attr('title');
+  //var Title= data['Items']['Item']['ItemAttributes']['Title'];
   var imageURL= $(this).children('img').attr('src');
+  //var imageURL= data['Items']['Item']['MediumImage']['URL'];
   $("#itemPic").attr('src', imageURL);
-  $(".price").html("List: $"+ price);
+  $(".price").html("List: "+ price);
   $(".prodTitle").html(Title.toUpperCase());
-  $(".sellerPage").children('a').attr('href', searchBox.val() );
-  $("#negotiate2").css('visibility','visible'); 
-  $("#itemNum").attr('value',number); 
-  $("#itemSearch").attr('value',searchBox.val()); 
-   e.preventDefault();
-   /*
- $("#title1").attr('value',Title); 
-  $("#image1").attr('value',imageUrl); 
-  $("#seller1").attr('value',seller); 
-  $("#link1").attr('value',sellerLink); 
+  //$(".sellerPage").children('a').attr('href', searchBox.val() ); 
+  //$("#itemNum").attr('value',number); 
+  //$("#itemSearch").attr('value',searchBox.val()); 
+  $("#title1").attr('value',Title); 
+  $("#image1").attr('value',imageURL); 
+  $("#link1").attr('value',searchBox.val()); 
   $("#price1").attr('value',price); 
-  */
+  
+  $("#negotiate2").css('visibility','visible');
+  e.preventDefault();
    });
 
   
@@ -199,10 +282,14 @@ $('.negButton').click(function() {
            			message: 'Your negotiation has been received!!!',
           			 showCloseButton: true
           			 });
+          			 
+          			 //products.empty();
+     		         //$("#cont").css('display','inline');
       			 }
        
        
      		});
+     		
      
      }
 });
@@ -269,14 +356,15 @@ if((low+21) < 100 )
    					 "All you have to do is register. On the home screen, type in your email address and create a password. You will receive a confirmation email from the Negotiatus team confirming your registration and welcoming you to the ecommerce revolution.",
    					 
    					 "Negotiatus will inform you via email when a buyer is interested in your product. FOR REGISTERED SELLERS: the negotiation will be reflected in your dashboard. Use Negotiatus’ custom analytics as a reference to analyze the offer and respond to the buyer via the negotiation room."];
+   
    $("#clickedQ").text($(this).text()); 
    var ansID= this.id;
    ansID= ansID.slice(1)-1;
    var answer= ansArray[ansID];
    $("#showAns").text(answer); 
    });
+	
    
-
    function nameTaken()
    {
       alert("ASDAS");

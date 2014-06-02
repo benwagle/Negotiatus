@@ -41,7 +41,7 @@ if($_SESSION['user'] == "negoteam")
    header('Location: master.php' , true, 302);
    
 else
- header('Location: dashboard.php' , true, 302);
+ header('Location: index.php' , true, 302);
  
  }
 ?>
